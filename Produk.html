@@ -1,5 +1,5 @@
- <!doctype html>
-
+<!doctype html>
+ 
 <html>
     <head>
         <meta charset="utf-8">
@@ -11,20 +11,81 @@
 
     </head>
 
-    <body>
+<body>
     <ul>
     <li> <a href="index.html"> Beranda</a></li>
     <li> <a href="Desain.html"> Proses Desain</a></li>
     <li>Produk</li>
     </ul>
-        
 
+    <h1>🎀 Tes Love Language 🎀</h1>
+    <p>Jawablah pernyataan-pernyataan berikut dan temukan love language kamu!</p>
 
+    <form id="quizForm">
+        <div class="question">
+            <p>1. Aku merasa dicintai ketika:</p>
+            <label><input type="radio" name="q1" value="A" required> Seseorang mengatakan hal manis & membesarkan hati</label><br>
+            <label><input type="radio" name="q1" value="B"> Seseorang menghabiskan waktu berkualitas denganku</label>
+        </div>
 
+        <div class="question">
+            <p>2. Aku merasa:</p>
+            <label><input type="radio" name="q2" value="A" required> Senang saat mendapatkan hadiah penuh makna</label><br>
+            <label><input type="radio" name="q2" value="B"> Hangat ketika disentuh dengan lembut, seperti pelukan</label>
+        </div>
 
-        <!-- Load external JavaScript -->
-        <script src="scripts.js"></script>
-        
-    </body>
+        <div class="question">
+            <p>3. Aku merasa:</p>
+            <label><input type="radio" name="q3" value="A" required> Terbantu saat seseorang melakukan hal kecil untukku tanpa diminta</label><br>
+            <label><input type="radio" name="q3" value="B"> Dipahami saat seseorang duduk menemaniku meskipun tanpa kata-kata</label>
+        </div>
 
+        <button type="submit">Lihat Hasil</button>
+    </form>
+
+    <div class="result" id="result" style="display: none;"></div>
+
+    <script>
+        const penjelasan = {
+            "Words of Affirmation": "Kamu merasa dicintai saat mendengar kata-kata yang membangun dan penuh kasih sayang. Ucapan seperti 'Aku bangga sama kamu' atau 'Kamu penting buatku' membuatmu merasa dihargai dan diperhatikan. Kalimat yang tulus bisa memberi dampak besar bagi hatimu.",
+            "Receiving Gifts": "Bagi kamu, hadiah bukan soal harga, tapi makna di baliknya. Kamu merasa dicintai saat seseorang memberimu sesuatu yang menunjukkan bahwa mereka memikirkanmu — bisa berupa barang kecil, kejutan, atau sesuatu yang spesial. Hadiah menjadi simbol perhatian.",
+            "Physical Touch": "Sentuhan fisik seperti pelukan, genggaman tangan, atau tepukan lembut membuatmu merasa dicintai. Kontak fisik sederhana memiliki arti besar untukmu karena bisa memberi rasa aman, nyaman, dan dekat secara emosional.",
+            "Quality Time": "Kamu merasa dicintai saat seseorang memberikan waktunya sepenuhnya untukmu. Momen kebersamaan tanpa gangguan, seperti ngobrol, jalan bareng, atau melakukan kegiatan bersama sangat berarti. Perhatian penuh adalah bahasa cintamu.",
+            "Acts of Service": "Tindakan lebih berbicara daripada kata-kata. Kamu merasa dihargai saat seseorang melakukan sesuatu untuk membantumu — misalnya membantu tugas, mengingatkan hal penting, atau melakukan sesuatu tanpa diminta. Ini menunjukkan bahwa kamu diprioritaskan."
+        };
+
+        const hasil = {
+            'AAA': "Words of Affirmation",
+            'AAB': "Receiving Gifts",
+            'ABA': "Physical Touch",
+            'ABB': "Quality Time",
+            'BAA': "Acts of Service",
+            'BAB': "Words of Affirmation",
+            'BBA': "Physical Touch",
+            'BBB': "Quality Time"
+        };
+
+        document.getElementById("quizForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const q1 = document.querySelector('input[name="q1"]:checked').value;
+            const q2 = document.querySelector('input[name="q2"]:checked').value;
+            const q3 = document.querySelector('input[name="q3"]:checked').value;
+            const kombinasi = q1 + q2 + q3;
+
+            const loveLanguage = hasil[kombinasi] || "Tidak dikenali";
+            const penjelasanText = penjelasan[loveLanguage] || "Penjelasan tidak tersedia untuk hasil ini.";
+
+            const resultDiv = document.getElementById("result");
+            resultDiv.style.display = "block";
+
+            resultDiv.innerHTML = `
+                <h2>🎉 Hasil Kuismu 🎉</h2>
+                <p><strong>Love language-mu adalah:</strong> ${loveLanguage}</p>
+                <p>${penjelasanText}</p>
+            `;
+        });
+    </script>
+
+</body>
 </html>
